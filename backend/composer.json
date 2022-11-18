@@ -1,0 +1,30 @@
+{
+    "name": "serotonin/english",
+    "autoload": {
+        "psr-4": {
+            "Serotonin\\English\\": "lib/"
+        }
+    },
+    "authors": [
+        {
+            "name": "kkxley",
+            "email": "kkxley@mail.ru"
+        }
+    ],
+    "require": {
+        "yiisoft/yii2": "^2.0",
+        "robmorgan/phinx": "^0.13.1",
+        "sam-it/yii2-mariadb": "^3.1"
+    },
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://asset-packagist.org"
+        }
+    ],
+    "config": {
+        "allow-plugins": {
+            "yiisoft/yii2-composer": true
+        }
+    }
+}

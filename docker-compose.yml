@@ -1,0 +1,30 @@
+version: "3"
+services:
+  mariadb:
+    image: "mariadb:latest"
+    volumes:
+      - "./deploy/docker-volumes/mysql:/var/lib/mysql:z"
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: 12341234
+      MYSQL_DATABASE: english
+
+  nginx:
+    image: "nginx:latest"
+    volumes:
+      - "./deploy/docker-volumes/logs:/var/log/nginx"
+      - "./deploy/configs/nginx:/etc/nginx/conf.d/"
+    ports:
+      - "3005:80"
+    depends_on:
+      - fpm
+
+  fpm:
+    build:
+      context: "./deploy/configs/php"
+    volumes:
+      - "./backend:/var/www/english-serotonin"
+      - "./deploy/docker-volumes/logs:/var/log/php"
+    depends_on:
+      - mariadb
