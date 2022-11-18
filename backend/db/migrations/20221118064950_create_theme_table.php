@@ -7,13 +7,13 @@ final class CreateThemeTable extends AbstractMigration
 {
     public function change()
     {
-        $themes = $this->table('themes', ['id' => false, 'primary_key' => 'theme_id']);
-        $themes->addColumn('theme_id', 'integer', ['limit' => 11, 'null' => false, 'identity' => true, 'comment' => 'id темы'])
+        $theme = $this->table('theme', ['id' => false, 'primary_key' => 'theme_id']);
+        $theme->addColumn('theme_id', 'integer', ['limit' => 11, 'null' => false, 'identity' => true, 'comment' => 'id темы'])
             ->addColumn('title', 'string', ['limit' => 255, 'null' => false, 'comment' => 'Название темы'])
             ->addColumn('parent_id', 'integer', ['limit' => 11, 'null' => false, 'default' => 0, 'comment' => 'Родительская тема'])
             ->create();
 
-        $themes->insert([
+        $theme->insert([
             'title' => 'Present simple',
         ])->insert([
             'title' => 'to be',

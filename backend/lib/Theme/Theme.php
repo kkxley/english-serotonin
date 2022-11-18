@@ -8,7 +8,7 @@ class Theme extends ActiveRecord
 {
     public static function tableName()
     {
-        return '{{themes}}';
+        return '{{theme}}';
     }
 
     public function getId(): int
