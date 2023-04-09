@@ -1,8 +1,19 @@
 <template>
   <div class="section">
-    <h2 v-if="title" class="section__title">{{ title }}</h2>
+    <h2
+      v-if="title"
+      class="section__title"
+    >
+      {{ title }}
+    </h2>
     <div class="section__cards">
-      <Card v-for="theme in themes" :title="theme.title" :description="theme.description" />
+      <Card
+        v-for="theme in themes"
+        :key="theme.path"
+        :path="theme.path"
+        :title="theme.title"
+        :description="theme.description"
+      />
     </div>
   </div>
 </template>

@@ -1,10 +1,15 @@
 <template>
-  <div class="card">
-    <h3 class="card__title">
-      {{ title }}
-    </h3>
-    <div class="card__description">
-      {{ description }}
+  <div
+    class="card"
+    @click="onClick"
+  >
+    <div>
+      <h3 class="card__title">
+        {{ title }}
+      </h3>
+      <div class="card__description">
+        {{ description }}
+      </div>
     </div>
   </div>
 </template>
@@ -13,6 +18,10 @@
 export default {
     name: "Card",
     props: {
+        path: {
+            type: String,
+            required: true
+        },
         title: {
             type: String,
             required: true
@@ -20,6 +29,11 @@ export default {
         description: {
             type: String,
             required: true
+        }
+    },
+    methods: {
+        onClick() {
+            this.$router.push({path: `/theme/${this.path}`});
         }
     }
 }

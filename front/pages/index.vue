@@ -18,8 +18,9 @@
   />
   <ThemeSection
     v-for="theme in themes"
-    :title="theme['title']"
-    :themes="theme['child']"
+    :key="theme.path"
+    :title="theme.title"
+    :themes="theme.child"
   />
 </template>
 <script>

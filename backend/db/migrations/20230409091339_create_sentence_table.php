@@ -19,27 +19,27 @@ final class CreateSentenceTable extends AbstractMigration
             ->create();
 
         $sentence->insert([
-            'theme_id' => 1,
+            'theme_id' => 8,
             'russian' => 'Это хороший результат.',
             'english' => 'It is a good result.',
             'type_id' => 1,
         ])->insert([
-            'theme_id' => 1,
+            'theme_id' => 8,
             'russian' => 'Он сейчас дома.',
             'english' => 'He is at home now.',
             'type_id' => 1,
         ])->insert([
-            'theme_id' => 1,
+            'theme_id' => 8,
             'russian' => 'Они отсутствуют.',
             'english' => 'They are away.',
             'type_id' => 1,
         ])->insert([
-            'theme_id' => 1,
+            'theme_id' => 8,
             'russian' => 'Она очень испугана.',
             'english' => 'She is very afraid.',
             'type_id' => 1,
         ])->insert([
-            'theme_id' => 1,
+            'theme_id' => 8,
             'russian' => 'Я так устал.',
             'english' => 'I am so tired.',
             'type_id' => 1,

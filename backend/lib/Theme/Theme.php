@@ -38,10 +38,15 @@ class Theme extends ActiveRecord
         return $this->getAttribute('description');
     }
 
+    public function getPath(): string
+    {
+        return $this->getAttribute('path');
+    }
+
     public function serialize(): array
     {
         return [
-            'id' => $this->getId(),
+            'path' => $this->getPath(),
             'title' => $this->getTitle(),
             'is_root' => $this->isRoot(),
             'parent_id' => $this->getParentId(),

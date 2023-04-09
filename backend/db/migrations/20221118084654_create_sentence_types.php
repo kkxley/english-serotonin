@@ -6,7 +6,7 @@ use Phinx\Migration\AbstractMigration;
 final class CreateSentenceTypes extends AbstractMigration
 {
 
-    public function change()
+    public function change(): void
     {
         $types = $this->table('sentence_types', ['id' => false, 'primary_key' => 'type_id']);
         $types->addColumn('type_id', 'integer', ['limit' => 11, 'null' => false, 'identity' => true, 'comment' => 'id типа'])
@@ -14,9 +14,9 @@ final class CreateSentenceTypes extends AbstractMigration
             ->create();
 
         $types->insert([
-            'title' => 'Вопросы',
-        ])->insert([
             'title' => 'Повествовательные',
+        ])->insert([
+            'title' => 'Вопросы',
         ])->insert([
             'title' => 'Вопросы с сложным подлежащим',
         ])->insert([
