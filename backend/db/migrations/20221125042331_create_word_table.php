@@ -5,14 +5,14 @@ use Phinx\Migration\AbstractMigration;
 
 final class CreateWordTable extends AbstractMigration
 {
-    public function change()
+    public function change(): void
     {
-        $theme = $this->table('word', ['id' => false, 'primary_key' => 'source']);
-        $theme->addColumn('source', 'string', ['limit' => 255, 'null' => false, 'comment' => 'Искомое слово'])
+        $words = $this->table('word', ['id' => false, 'primary_key' => 'source']);
+        $words->addColumn('source', 'string', ['limit' => 255, 'null' => false, 'comment' => 'Искомое слово'])
             ->addColumn('confusion', 'string', ['limit' => 1024, 'null' => false, 'comment' => 'Слова для путаницы'])
             ->create();
 
-        $theme->insert([
+        $words->insert([
             'source' => 'am',
             'confusion' => '|is|are|',
         ])->insert([

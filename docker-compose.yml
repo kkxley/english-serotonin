@@ -1,9 +1,7 @@
 version: "3"
 services:
   mariadb:
-    image: "mariadb:latest"
-    volumes:
-      - "./deploy/docker-volumes/mysql:/var/lib/mysql:z"
+    image: "mysql:latest"
     ports:
       - "3306:3306"
     environment:
@@ -20,6 +18,17 @@ services:
     depends_on:
       - fpm
 
+  front:
+    image: node:16.10.0-buster
+    volumes:
+      - "./front:/app"
+    command: bash -c "yarn && yarn dev"
+    working_dir: "/app"
+    ports:
+      - "24678:24678"
+    depends_on:
+      - fpm
+
   fpm:
     build:
       context: "./deploy/configs/php"
@@ -28,3 +37,4 @@ services:
       - "./deploy/docker-volumes/logs:/var/log/php"
     depends_on:
       - mariadb
+

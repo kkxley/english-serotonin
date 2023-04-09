@@ -9,7 +9,7 @@ return [
         'default_environment' => 'development',
         'production' => [
             'adapter' => 'mysql',
-            'host' => 'mariadb',
+            'host' => '127.0.0.1',
             'name' => 'english',
             'user' => 'root',
             'pass' => '12341234',
@@ -18,7 +18,7 @@ return [
         ],
         'development' => [
             'adapter' => 'mysql',
-            'host' => 'mariadb',
+            'host' => '127.0.0.1',
             'name' => 'english',
             'user' => 'root',
             'pass' => '12341234',

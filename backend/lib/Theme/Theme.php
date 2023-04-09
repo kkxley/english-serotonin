@@ -33,6 +33,11 @@ class Theme extends ActiveRecord
         return (int)$this->getAttribute('parent_id');
     }
 
+    public function getDescription(): string
+    {
+        return $this->getAttribute('description');
+    }
+
     public function serialize(): array
     {
         return [
@@ -40,6 +45,7 @@ class Theme extends ActiveRecord
             'title' => $this->getTitle(),
             'is_root' => $this->isRoot(),
             'parent_id' => $this->getParentId(),
+            'description' => $this->getDescription(),
         ];
     }
 }

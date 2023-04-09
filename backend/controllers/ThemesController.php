@@ -9,7 +9,23 @@ class ThemesController extends Controller
 {
     public function actionIndex()
     {
-        $themes = array_map(fn (Theme $theme) => $theme->serialize(), Theme::find()->all());
-        return $this->asJson($themes);
+        $themes = Theme::find()->all();
+        $tree = array_reduce($themes, function ($tree, Theme $theme) {
+            if ($theme->isRoot()) {
+                $tree[$theme->getId()] = [
+                    ...$theme->serialize(),
+                    ...($tree[$theme->getId()] ?? [])
+                ];
+
+                return $tree;
+            }
+
+            $tree[$theme->getParentId()]["child"][] = $theme->serialize();
+
+            return $tree;
+        }, []);
+
+
+        return $this->asJson($tree);
     }
 }
