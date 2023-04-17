@@ -2,6 +2,10 @@ const {resolve} = require('path'),
     frontRoot = resolve(__dirname);
 
 module.exports = {
+    server: {
+        host: '0.0.0.0',
+        port: 3001
+    },
     css: [
         resolve(frontRoot, 'scss', 'main.scss')
     ],
