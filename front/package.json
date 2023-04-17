@@ -4,10 +4,8 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "dev": "nuxt dev",
-    "build": "nuxt build",
-    "generate": "nuxt generate",
-    "start": "nuxt start",
+    "dev": "nuxt dev --dotenv .env.production",
+    "build": "nuxt build --dotenv .env.production",
     "eslint": "eslint \"./**/*.{js,vue}\""
   },
   "dependencies": {

@@ -10,7 +10,6 @@
   </div>
 </template>
 <script>
-import axios from "axios";
 import CheckBox from "../../shared/CheckBox.vue";
 
 export default {

@@ -43,14 +43,32 @@ class Theme extends ActiveRecord
         return $this->getAttribute('path');
     }
 
+    public function getFormulaSimple(): string
+    {
+        return $this->getAttribute('formula_simple');
+    }
+
+    public function getFormulaQuestion(): string
+    {
+        return $this->getAttribute('formula_question');
+    }
+
+    public function getExamples(): array
+    {
+        return array_filter(explode('|', $this->getAttribute('examples')));
+    }
+
+
     public function serialize(): array
     {
         return [
             'path' => $this->getPath(),
             'title' => $this->getTitle(),
             'is_root' => $this->isRoot(),
-            'parent_id' => $this->getParentId(),
             'description' => $this->getDescription(),
+            'formula_simple' => $this->getFormulaSimple(),
+            'formula_question' => $this->getFormulaQuestion(),
+            'examples' => $this->getExamples(),
         ];
     }
 }

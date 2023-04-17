@@ -12,7 +12,13 @@ return [
                 'api/<controller:(\w+)>/<action:(\w+)>' => '<controller>/<action>',
                 'api/<controller:(\w+)>/' => '<controller>/index',
                 'api/sentences/<themePath:[\w,-]+>' => 'sentences/index',
+                'api/themes/<themePath:[\w,-]+>' => 'themes/index',
             ]
+        ],
+        'request' => [
+            'enableCookieValidation' => true,
+            'enableCsrfValidation' => true,
+            'cookieValidationKey' => '123',
         ]
     ]
 ];

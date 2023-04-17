@@ -71,11 +71,14 @@ export default {
         }
     },
     watch: {
-        initialWords () {
-            this.words = [...this.initialWords]
-            this.areaWords = []
-            this.currentWord = null
-        }
+        initialWords: {
+            handler() {
+                this.words = [...this.initialWords]
+                this.areaWords = []
+                this.currentWord = null
+            },
+            deep: true
+        },
     },
     mounted() {
         this.words = [...this.initialWords]
@@ -136,12 +139,15 @@ export default {
 
         display: flex;
         flex-direction: row;
+        flex-wrap: wrap;
     }
 
     &__words {
         display: flex;
         flex-direction: row;
         column-gap: 8px;
+        row-gap: 8px;
+        flex-wrap: wrap;
     }
 
     &__word {

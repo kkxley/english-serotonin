@@ -27,5 +27,6 @@ module.exports = {
     },
     static: {
         prefix: false
-    }
+    },
+    buildModules: [['@nuxtjs/dotenv', { path: './' }]],
 }

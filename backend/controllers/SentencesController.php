@@ -15,9 +15,9 @@ use yii\web\NotFoundHttpException;
 
 class SentencesController extends Controller
 {
-    public function actionIndex(string $themePath)
+    public function actionIndex(string $themePath): \yii\web\Response
     {
-        $typeIds = array_filter(explode(',', Yii::$app->getRequest()->getQueryParam('types')));
+        $typeIds = array_filter(explode(',', Yii::$app->getRequest()->getQueryParam('types', '1,2,3,4')));
 
         $themeId = Theme::find()
             ->select('theme_id')
@@ -52,7 +52,9 @@ class SentencesController extends Controller
                 $sentence->serialize(),
                 [
                     'words' => $confusionWords,
-                    'success' => true
+                    'success' => true,
+                    'csrf' => Yii::$app->request->csrfParam,
+                    'token' => Yii::$app->request->csrfToken
                 ]
             )
         );
@@ -67,5 +69,20 @@ class SentencesController extends Controller
                 'types' => array_map(fn(SentenceType $type) => $type->serialize(), $types)
             ]
         );
+    }
+
+    public function actionCheck(): \yii\web\Response
+    {
+        $sentenceRu = Yii::$app->request->post('sentence', 1);
+        $words = Yii::$app->getRequest()->post('words', []);
+
+        /** @var Sentence $sentence */
+        $sentence = Sentence::find()
+            ->where(['russian' => $sentenceRu])
+            ->one();
+
+        return $this->asJson([
+            'isValid' => $sentence->isValid(explode(',', $words))
+        ]);
     }
 }

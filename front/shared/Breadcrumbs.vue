@@ -2,7 +2,9 @@
   <div class="breadcrumbs">
     <div
       v-for="route in routes"
+      :key="route.name"
       class="breadcrumbs__item"
+      @click="go(route.path)"
     >
       {{ route.name }}
     </div>
@@ -17,7 +19,14 @@ export default {
       type: Array,
       required: true
     }
-  }
+  },
+    methods: {
+        go(path) {
+            if (path) {
+                this.$router.push({path})
+            }
+        }
+    }
 }
 </script>
 

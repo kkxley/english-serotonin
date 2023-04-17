@@ -5,7 +5,7 @@
         Serotonin
       </div>
       <div class="header__logo__sub">
-        дизайн и разработка
+        english practice
       </div>
     </div>
   </div>
@@ -19,11 +19,15 @@ export default {
 
 <style lang="scss" scoped>
 .header {
+    display: flex;
+    align-items: center;
     padding-top: 25px;
     margin-bottom: 70px;
+    box-sizing: border-box;
 
     &__logo {
         display: flex;
+        align-items: center;
         flex-direction: column;
         font-family: 'Raleway', sans-serif;
 
@@ -35,7 +39,7 @@ export default {
 
         &__sub {
             font-weight: 400;
-            font-size: 14px;
+            font-size: 19px;
             letter-spacing: 0.02em;
             line-height: 16px;
         }

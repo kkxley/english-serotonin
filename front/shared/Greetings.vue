@@ -38,6 +38,7 @@ export default {
     &__description {
         font-weight: 400;
         font-size: 22px;
+        white-space: break-spaces;
     }
 }
 </style>

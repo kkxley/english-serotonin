@@ -4,7 +4,10 @@
       Тренируйтесь легко
     </div>
     <div class="welcome__description">
-      Маркетинговая коммуникация выражена наиболее полно. Как отмечает Майкл
+      {{
+        `Наше обучающее приложение предоставляет возможность тренировать навыки составления предложений на английском языке.
+        \nВы сможете улучшить свой словарный запас и научиться строить грамматически правильные предложения.`
+      }}
     </div>
     <img
       class="welcome__img"
@@ -13,8 +16,8 @@
     >
   </div>
   <Greetings
-    title="Header"
-    description="Какой-то сопутствующий текст, объясняющий этот раздел"
+    title="Выберите тему"
+    :description="`Добро пожаловать в раздел выбора темы тренировки нашего обучающего приложения!\nЗдесь вы можете выбрать тему, которую хотите изучить, и улучшить свои знания на эту тему на английском языке.`"
   />
   <ThemeSection
     v-for="theme in themes"
@@ -27,7 +30,7 @@
 
 import ThemeSection from "../shared/ThemeSection.vue";
 import Greetings from "../shared/Greetings.vue";
-import axios from "axios";
+import api from "../shared/api";
 
 export default {
     name: "Index",
@@ -37,14 +40,8 @@ export default {
             themes: []
         };
     },
-    async mounted() {
-        axios({
-            method: 'get',
-            url: 'http://localhost:3005/api/themes'
-        })
-            .then(({data}) => {
-                this.themes = data
-            });
+    mounted() {
+        api.getThemes().then(themes => this.themes = themes);
     }
 }
 </script>
@@ -68,7 +65,7 @@ export default {
 
     &__title {
         font-weight: 700;
-        font-size: 65px;
+        font-size: 46px;
         position: relative;
         margin-bottom: 23px;
         width: 50%;
@@ -77,10 +74,11 @@ export default {
 
     &__description {
         font-weight: 400;
-        font-size: 30px;
+        font-size: 22px;
         position: relative;
         width: 50%;
         font-family: 'Raleway', sans-serif;
+        white-space: break-spaces;
     }
 
     &__img {

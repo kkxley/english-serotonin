@@ -30,11 +30,18 @@ class Sentence extends ActiveRecord
 
     public function getEnglishWords(): array
     {
-        $sentence = $this->getEnglish();
-        $sentence = preg_replace('/[,.!?]/', '', $sentence);
-        $sentence = mb_strtolower($sentence);
+        return array_map(fn(string $word) => trim($word), explode(' ', $this->getPureSentence($this->getEnglish())));
+    }
 
-        return array_map(fn(string $word) => trim($word), explode(' ', $sentence));
+    private function getPureSentence (string $sentence): string
+    {
+        $sentence = preg_replace('/[,.!?]/', '', $sentence);
+        return mb_strtolower($sentence);
+    }
+
+    public function isValid (array $words): bool
+    {
+        return $this->getPureSentence($this->getEnglish()) === implode(' ', $words);
     }
 
     public function serialize(): array
