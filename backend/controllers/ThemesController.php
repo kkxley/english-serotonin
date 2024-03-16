@@ -26,7 +26,7 @@ class ThemesController extends Controller
         }, []);
 
 
-        return $this->asJson($tree);
+        return $this->asJson(array_values($tree));
     }
 
     public function actionIndex(string $themePath)
