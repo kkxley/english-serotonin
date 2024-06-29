@@ -6,14 +6,13 @@ const SENTENCES_TYPES = 'sentences/types';
 const SENTENCE = (theme, ids) => `sentences/${theme}?types=${ids}`;
 const SENTENCES_CHECK = 'sentences/check';
 
-class Api {
+const SENTENCES = (theme) => `sentences?themePath=${theme}`;
+const SENTENCES_ADD = 'sentences/add';
+
+class BaseApi {
 
     constructor(baseUrl) {
         this.baseUrl = baseUrl
-    }
-
-    getTheme(path) {
-        return this.get(THEME(path))
     }
 
     setCSRF(name, value) {
@@ -24,18 +23,6 @@ class Api {
     get(path) {
         return axios.get(`${this.baseUrl}${path}`)
             .then(({data}) => data);
-    }
-
-    getThemes() {
-        return this.get(THEMES);
-    }
-
-    getSentencesTypes() {
-        return this.get(SENTENCES_TYPES)
-    }
-
-    getSentence(theme, typesId) {
-        return this.get(SENTENCE(theme, typesId.join(',')))
     }
 
     post(path, data) {
@@ -52,11 +39,58 @@ class Api {
         return axios.post(`${this.baseUrl}${path}`, formData)
             .then(({data}) => data);
     }
+}
 
-    checkSentence ({sentence, words}) {
+class Api extends BaseApi {
+
+    getTheme(path) {
+        return this.get(THEME(path))
+    }
+
+    getThemes() {
+        return this.get(THEMES);
+    }
+
+    getSentencesTypes() {
+        return this.get(SENTENCES_TYPES)
+    }
+
+    getSentence(theme, typesId) {
+        return this.get(SENTENCE(theme, typesId.join(',')))
+    }
+
+    checkSentence({sentence, words}) {
         return this.post(SENTENCES_CHECK, {sentence, words});
     }
 }
 
+class AdminApi extends BaseApi {
+    constructor(baseUrl, baseApi) {
+        super(baseUrl);
+        this.api = baseApi
+    }
+
+    getThemes() {
+        return this.api.getThemes();
+    }
+
+    getSentences(theme) {
+        return this.get(SENTENCES(theme))
+    }
+
+    addSentences(theme, type, russian, english) {
+        return this.post(SENTENCES_ADD, {
+            theme, type, russian, english
+        })
+    }
+
+    getSentencesTypes() {
+        return this.api.getSentencesTypes()
+    }
+}
+
+const api = new Api('http://localhost:3005/api/')
+
 //console.log(process.env.BASE_URL)
-export default new Api('http://localhost:3005/api/')
+export default api
+export const adminApi = new AdminApi('http://localhost:3005/api/admin/', api)

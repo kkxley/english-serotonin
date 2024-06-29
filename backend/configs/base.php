@@ -9,6 +9,8 @@ return [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+                'api/admin/sentences/add' => 'admin/sentences/add',
+                'api/admin/sentences' => 'admin/sentences/all',
                 'api/<controller:(\w+)>/<action:(\w+)>' => '<controller>/<action>',
                 'api/<controller:(\w+)>/' => '<controller>/index',
                 'api/sentences/<themePath:[\w,-]+>' => 'sentences/index',
@@ -17,7 +19,7 @@ return [
         ],
         'request' => [
             'enableCookieValidation' => true,
-            'enableCsrfValidation' => true,
+            'enableCsrfValidation' => false,
             'cookieValidationKey' => '123',
         ]
     ]

@@ -11,7 +11,6 @@ use Serotonin\English\Theme\Theme;
 use Serotonin\English\Word\Word;
 use Yii;
 use yii\web\Controller;
-use yii\web\NotFoundHttpException;
 
 class SentencesController extends Controller
 {
